@@ -47,6 +47,12 @@ for n in range(1, min(100, X.shape[1])+1):
     if acc > 0.75:
         print(f"Minimal subset size for >75% accuracy: {n} genes")
         print("Gene IDs:", gene_list[:n])
+        with open('minimal_predictive_genes.txt', 'w') as f:
+            f.write(f"Minimal subset size for >75% accuracy: {n} genes\n")
+            f.write("Gene IDs: " + ','.join(gene_list[:n]) + "\n")
+            f.write(f"Cross-validated accuracy: {acc:.3f}\n")
         break
 else:
     print("No subset of up to 100 genes achieves >75% accuracy.")
+    with open('minimal_predictive_genes.txt', 'w') as f:
+        f.write("No subset of up to 100 genes achieves >75% accuracy.\n")
