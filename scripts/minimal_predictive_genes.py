@@ -56,3 +56,30 @@ else:
     print("No subset of up to 100 genes achieves >75% accuracy.")
     with open('minimal_predictive_genes.txt', 'w') as f:
         f.write("No subset of up to 100 genes achieves >75% accuracy.\n")
+
+# Plot expression values for the 9 most predictive genes
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
+import matplotlib.pyplot as plt
+
+nine_genes = gene_list[:9]
+expr_matrix = np.array([[gene_expr[g].get(s, np.nan) for g in nine_genes] for s in samples])
+traits = [trait_map[s] for s in samples]
+
+print(f"Creating plot with {len(nine_genes)} genes and {len(samples)} samples")
+
+plt.figure(figsize=(12, 6))
+for i, g in enumerate(nine_genes):
+    plt.subplot(3, 3, i+1)
+    plt.title(g)
+    plt.scatter(range(len(samples)), expr_matrix[:, i], c=[1 if t=='tolerant' else 0 for t in traits], cmap='coolwarm', label='Expression')
+    plt.xlabel('Sample')
+    plt.ylabel('Expression')
+plt.tight_layout()
+plt.suptitle('Expression of 9 Most Predictive Genes', y=1.02)
+
+# Save the plot
+output_file = 'nine_predictive_genes_expression.png'
+plt.savefig(output_file, bbox_inches='tight', dpi=300)
+print(f"Plot saved to: {output_file}")
+plt.close()  # Close the figure to free memory
