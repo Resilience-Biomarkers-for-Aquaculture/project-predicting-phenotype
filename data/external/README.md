@@ -1,7 +1,6 @@
 # External Data
 
-This directory contains data from external sources.
+This directory contains raw gene count matrices and other external data sources.
 
-- Store third-party datasets and references
-- Include source URLs and licensing information
-- Document any external dependencies
+- `.tsv` files: raw gene count matrices for each sample
+- See `../processed` for normalized and grouped data

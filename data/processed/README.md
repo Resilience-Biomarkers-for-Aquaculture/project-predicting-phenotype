@@ -1,7 +1,7 @@
-# Processed Data
+# Processed gene count matrices
+This folder contains normalized gene count matrices and sample groupings generated from the raw count data in `../external`.
 
-This directory contains cleaned and processed data files.
+- `.normalized.tsv` files: normalized gene counts for each sample
+- `sample_groups_*.csv`: sample group assignments for 2-5 clusters
 
-- Store intermediate and final processed datasets
-- Include processing scripts or references to them
-- Maintain version control for different processing stages
+See `../../scripts/normalize_and_group.py` for processing details.

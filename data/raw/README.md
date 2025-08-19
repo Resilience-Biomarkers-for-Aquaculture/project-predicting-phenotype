@@ -1,7 +1,7 @@
 # Raw Data
 
-This directory contains original, unmodified data files.
+This directory contains unmodified raw data files for the project.
 
-- Keep original data files unchanged
-- Document data sources and collection methods
-- Use descriptive filenames with dates when applicable
+- Do not edit files in this folder
+- See `../external` for external sources
+- See `../processed` for processed outputs
