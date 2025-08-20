@@ -218,29 +218,34 @@ def remove_batch_effects(data, sample_metadata):
                                 index=data.index, 
                                 columns=data.columns)
     
-    # Method 3: Combat-like batch correction (simplified)
-    print("Method 3: Combat-like batch correction")
-    data_combat = data.copy()
-    
-    # Calculate global mean and variance
-    global_mean = data.mean(axis=1)
-    global_var = data.var(axis=1)
+    # Method 3: Z-score normalization per experiment
+    print("Method 3: Z-score normalization per experiment")
+    data_zscore = data.copy()
     
     for exp in sample_metadata['experiment'].unique():
         exp_cols = sample_metadata[sample_metadata['experiment'] == exp].index
         if len(exp_cols) > 0:
-            exp_data = data[exp_cols]
-            exp_mean = exp_data.mean(axis=1)
-            exp_var = exp_data.var(axis=1)
-            
-            # Adjust mean and variance
-            adjusted_data = ((exp_data - exp_mean) / np.sqrt(exp_var)) * np.sqrt(global_var) + global_mean
-            data_combat[exp_cols] = adjusted_data
+            # Filter columns that actually exist in the data
+            available_cols = [col for col in exp_cols if col in data.columns]
+            if len(available_cols) > 0:
+                exp_data = data[available_cols]
+                exp_mean = exp_data.mean(axis=1)
+                exp_std = exp_data.std(axis=1)
+                
+                # Handle division by zero
+                exp_std_safe = exp_std.replace(0, 1e-10)
+                
+                # Z-score normalization
+                zscore_data = (exp_data - exp_mean) / exp_std_safe
+                
+                # Ensure the data is properly assigned
+                for col in available_cols:
+                    data_zscore[col] = zscore_data[col]
     
     return {
         'centered': data_centered,
         'quantile': data_quantile,
-        'combat': data_combat
+        'zscore': data_zscore
     }
 
 def find_predictive_genes(data, sample_metadata, method_name):

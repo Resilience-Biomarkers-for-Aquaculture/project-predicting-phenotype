@@ -1,0 +1,18 @@
+TRAIT PREDICTION FUNCTION DOCUMENTATION
+==================================================
+
+Best Model: Gradient Boosting
+CV Accuracy: 0.879
+Number of genes used: 50
+
+Usage:
+from scripts.trait_classification_model import predict_trait
+result = predict_trait(new_sample_data, confidence_threshold=0.6)
+
+Returns:
+- predicted_trait: 'sensitive' or 'tolerant'
+- confidence: confidence score (0-1)
+- prediction_status: 'high_confidence' or 'low_confidence'
+- probability_tolerant: probability of being tolerant
+- probability_sensitive: probability of being sensitive
+- genes_used: list of genes used for prediction
