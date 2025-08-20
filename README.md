@@ -1,6 +1,6 @@
 # Project: Predicting Phenotype
 
-This repository contains comprehensive gene expression analysis tools for predicting phenotypes (sensitive/tolerant traits) using machine learning models based on predictive gene expression profiles. Note entire repo mirror**including large files** can be found [here].(https://gannet.fish.washington.edu/v1_web/owlshell/bu-github/project-predicting-phenotype/)
+This repository contains comprehensive gene expression analysis tools for predicting phenotypes (sensitive/tolerant traits) using machine learning models based on predictive gene expression profiles. Note entire repo mirror**including large files** can be found [here](https://gannet.fish.washington.edu/v1_web/owlshell/bu-github/project-predicting-phenotype/).
 
 ## Overview
 
