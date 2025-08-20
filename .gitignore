@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# Large data files that exceed GitHub's 100MB limit
+data/processed/gene_counts_centered_corrected.tsv
+data/processed/gene_counts_quantile_corrected.tsv
